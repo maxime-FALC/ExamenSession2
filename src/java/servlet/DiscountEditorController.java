@@ -29,7 +29,7 @@ public class DiscountEditorController extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-		// Quelle action a servi à appeler la servlet ? (Ajouter, Supprimer ou aucune = afficher)
+		// Quelle action a servi à appeler la servlet ? (Ajouter, Supprimer, Update ou aucune = afficher)
 		String action = request.getParameter("action");
 		action = (action == null) ? "" : action; // Pour le switch qui n'aime pas les null
 		String code = request.getParameter("code");
@@ -51,6 +51,11 @@ public class DiscountEditorController extends HttpServlet {
 					} catch (SQLIntegrityConstraintViolationException e) {
 						request.setAttribute("message", "Impossible de supprimer " + code + ", ce code est utilisé.");
 					}
+                                        break;
+                                case "UPDATE": // Requête de mise à jour
+                                        dao.updateDiscountCode(code, Float.valueOf(taux));
+					request.setAttribute("message", "Code " + code + " modifié");
+					request.setAttribute("codes", dao.allCodes());	                                        
 					break;
 			}
 		} catch (Exception ex) {

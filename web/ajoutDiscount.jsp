@@ -57,6 +57,7 @@
 				<form class="tr" method="get">
 					<div class="td"><input type="text" name="code" value="${record.discountCode}" readonly/></div>
 					<div class="td"><input name="taux" type="number" step="0.01" min="0.0" max="99.99" size="5" value="${record.rate}"/></div>
+                                        <div class="td"><input type="submit" name="action" value="UPDATE"/></div>
 					<div class="td"><input type="submit" name="action" value="DELETE"/></div>
 				</form>	  		    
 			</c:forEach>  
